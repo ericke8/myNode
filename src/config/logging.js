@@ -1,7 +1,7 @@
 const log4js = require("log4js");
 
 const DEFAULT_LOG_LEVEL =
-  process.env.LOG_LEVEL || (process.env.NODE_ENV == "test") ? "error" : "info";
+  process.env.LOG_LEVEL || process.env.NODE_ENV == "test" ? "error" : "info";
 
 module.exports = {
   configureLogging() {
@@ -10,6 +10,6 @@ module.exports = {
       categories: {
         default: { appenders: ["out"], level: DEFAULT_LOG_LEVEL }
       }
-    })
+    });
   }
-}
+};

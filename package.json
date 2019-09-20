@@ -8,6 +8,7 @@
     "log4js": "^5.1.0",
     "nodemon": "^1.19.2",
     "pg": "^7.12.1",
+    "pg-hstore": "^2.3.3",
     "sequelize": "^5.19.0"
   },
   "devDependencies": {
