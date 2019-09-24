@@ -4,7 +4,10 @@ require("dotenv").config();
 const express = require("express");
 const log4js = require("log4js");
 
+const { ApolloServer } = require("apollo-server-express");
+
 const { postThing, getThing } = require("./handlers");
+const { resolvers, typeDefs } = require("./graphql");
 const { configureLogging } = require("./config/logging");
 const { setupDB } = require("./database");
 
@@ -17,6 +20,7 @@ configureLogging();
 setupDB();
 
 const app = express();
+const apolloServer = new ApolloServer({ resolvers, typeDefs });
 
 app.use(express.json());
 
@@ -24,6 +28,7 @@ app.post("/api/v1/post", postThing);
 
 app.get("/api/v1/get", getThing);
 
+apolloServer.applyMiddleware({ app, path: "/graphql" });
 
 app.listen(PORT, () => {
   logger.info(`Listening on port ${PORT}`);
